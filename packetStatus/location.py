@@ -61,13 +61,9 @@ class Location():
 
     @staticmethod
     def edit_tz(word):
-        rev = word.split("/")
-        del(rev[0])
-        word = "".join(rev)
+        word = list(word.split("/")[1])
 
-        word = list(word)
         for pos, letter in enumerate(word):
             if letter == "_": word[pos] = " "
-            else: continue
-        word = "".join(word)
-        return word
+
+        return "".join(word)
