@@ -1,32 +1,9 @@
 from bs4 import BeautifulSoup
 import requests
 
-from abc import ABC, abstractmethod
+from .scraper import Scraper
 
-
-class Packet(ABC):
-    def __init__(self, objeto, **kwargs):
-        self.__objeto = objeto
-        self.__URL = None
-
-        self.log = []
-
-    @abstractmethod
-    def check_new_info(self): raise NotImplementedError
-
-    @abstractmethod
-    def set_tracking_url(self, URL):
-        # ADD SUPPORTED PLATFORMS
-        self.__URL = URL
-
-    @property
-    def URL(self): return self.__URL
-
-    @property
-    def objeto(self): return self.__objeto
-
-
-class Correios(Packet):
+class Correios(Scraper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_tracking_url(

@@ -1,3 +1,3 @@
-__all__ = ["Packet", "Correios"]
-
-from .packet import *
+from .packet import Scraper
+from .correios import Correios
+from .cep import Cep
