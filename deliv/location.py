@@ -9,10 +9,9 @@ class Location():
     def __init__(self, **kwargs):
         self.geo_locator = Nominatim(user_agent="locator-sourcerer0")
         self.__time = Delorean()
-        self.__location = None
-
+        
         try: self.location = (kwargs["location"])
-        except KeyError: pass
+        except KeyError: self.__location = None
 
     def up_time(self): return self.__time.format_datetime()
 
