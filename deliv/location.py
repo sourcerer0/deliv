@@ -11,22 +11,26 @@ class Location():
         self.__time = Delorean()
         self.__location = None
 
-    def up_time(self): return self.__time
+        try: self.location = (kwargs["location"])
+        except KeyError: pass
+
+    def up_time(self): return self.__time.format_datetime()
 
     def set_timezone(self):
         new_timezone = Location.search_timezone(self.__location)
-        self.time.shift(new_timezone)
+        self.__time.shift(new_timezone)
 
 
 
     @property
-    def time(self): return self.__time.now()
+    def time(self): return self.__time.now().format_datetime()
 
     @property
     def location(self):
-        try: print("Coordinates: %f, %f" % (self.__location["lat"], self.__location["lon"]))
-        except: print("No coordinates founded")
-        for key in self.__location["address"]: print(key.upper(), self.__location[key])
+        try: print("Coordinates:".upper(), self.__location["lat"], self.__location["lon"])
+        except KeyError: print("No coordinates founded")
+
+        for key in self.__location["address"]: print("%s: %s" % (key.upper(), self.__location["address"][key]))
 
     @location.setter
     def location(self, place):
@@ -38,13 +42,13 @@ class Location():
 
 
     @staticmethod
-    def search_timezone(PLACE, accpt_distance=250):
-        COUNTRY_ID = pycountry.countries.get(official_name=PLACE["address"].get("country"))
+    def search_timezone(PLACE, distance=250):
+        COUNTRY_ID = PLACE["address"]["country_code"]
         ERRORS, CHECKED = 0, 0
 
         TIMEZONE = ["", 1000]
 
-        for zone in pytz.country_timezones[COUNTRY_ID.alpha_2]:
+        for zone in pytz.country_timezones[COUNTRY_ID]:
             CHECKED+=1
             try:
                 tz_location_info = Location.geo_locator.geocode(Location.edit_tz(zone), addressdetails=True, language="en")
@@ -52,7 +56,7 @@ class Location():
 
                 distance = great_circle((PLACE["lat"], PLACE["lon"]), tz_location_info.point).km
                 if distance < TIMEZONE[1]: TIMEZONE = [zone, distance]
-                if distance < accpt_distance: break
+                if distance < distance: break
 
                 if CHECKED % 3: key = ""
                 else: key = "\n"
