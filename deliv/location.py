@@ -29,7 +29,11 @@ class Location():
         for key in self.__location["address"]: print(key.upper(), self.__location[key])
 
     @location.setter
-    def location(self, place): self.__location = self.geo_locator.geocode(place, addressdetails=True, language="en").raw
+    def location(self, place):
+        if type(place) == type(()):
+            self.__location = self.geo_locator.reverse(place, addressdetails=True, language="en").raw
+        elif type(place) == type(""):
+            self.__location = self.geo_locator.geocode(place, addressdetails=True, language="en").raw
 
 
 
