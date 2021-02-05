@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
-    description="Packet tracking service scraper",
+    description="Delivery service scraper",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sourcerer0/packetStatus",

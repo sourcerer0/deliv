@@ -1,5 +1,5 @@
 # packetStatus
-Packet tracking service scraper
+Delivery service scraper
 
 ## Installation
 Get source code
