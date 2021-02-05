@@ -1,10 +1,10 @@
-# packetStatus
+# deliv
 Delivery service scraper
 
 ## Installation
 Get source code
 ```shell script
-git clone git@github.com:sourcerer0/packetStatus.git && cd packetStatus
+git clone git@github.com:sourcerer0/deliv.git && cd deliv
 ```
 > Don't forget to add --branch to 'git clone' command, and get the latest version.
 
@@ -17,8 +17,8 @@ pip3 install -r requirements.txt
 ## Docs
 
 ## Contributing & Issue Tracker
-Branch & [Pull Request](https://github.com/sourcerer0/packetStatus/pulls)
-- [Issues](https://github.com/sourcerer0/packetStatus/issues)
+Branch & [Pull Request](https://github.com/sourcerer0/deliv/pulls)
+- [Issues](https://github.com/sourcerer0/deliv/issues)
 
 ## License
-[Apache License 2.0](https://github.com/sourcerer0/packetStatus/blob/master/LICENSE)
+[Apache License 2.0](https://github.com/sourcerer0/deliv/blob/master/LICENSE)
