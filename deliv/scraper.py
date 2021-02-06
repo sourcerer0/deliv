@@ -5,7 +5,7 @@ class Scraper(ABC):
     def __init__(self, **kwargs):
         """
         Parameters:
-            kwargs['data'] (string): Data
+            kwargs['data'] (string): Data to be submitted
         """
         self.__data = kwargs["data"]
         self.__URL = None
