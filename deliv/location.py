@@ -28,7 +28,7 @@ class Location():
     def time(self): return self.__time.now().shift(self.__timezone)
 
     @property
-    def human_time(self): return self.time.format_datetime()
+    def human_time(self): print(self.time.format_datetime())
 
     @property
     def location(self):
