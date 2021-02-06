@@ -40,9 +40,15 @@ class Location():
     @location.setter
     def location(self, place):
         if type(place) == type(()):
-            self.__location = self._geo_locator.reverse(place, addressdetails=True, language="en").raw
+            try:
+                self.__location = self._geo_locator.reverse(place, addressdetails=True, language="en").raw
+            except AttributeError:
+                print("ERROR ****** Check place input and network connection!******")
         elif type(place) == type(""):
-            self.__location = self._geo_locator.geocode(place, addressdetails=True, language="en").raw
+            try:
+                self.__location = self._geo_locator.geocode(place, addressdetails=True, language="en").raw
+            except AttributeError:
+                print("ERROR ****** Check place input and network connection!******")
 
 
 

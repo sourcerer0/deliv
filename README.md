@@ -5,6 +5,8 @@ Delivery service scraper
 Get source code
 ```shell script
 git clone git@github.com:sourcerer0/deliv.git && cd deliv
+
+python3 -m setup install
 ```
 > Don't forget to add --branch to 'git clone' command, and get the latest version.
 
