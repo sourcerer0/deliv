@@ -2,12 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 
 from .scraper import Scraper
+from .location import Location
 
 class Cep(Scraper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.__address = Location
 
-        self.__ADDRESS = None
         self.set_tracking_url(
             "http://www.buscacep.correios.com.br/sistemas/buscacep/resultadoBuscaCepEndereco.cfm")
 
@@ -18,15 +19,14 @@ class Cep(Scraper):
         for _ in range(10):
             if reply.ok:
                 soup = BeautifulSoup(reply.text, "html.parser")
-                result = soup.find_all("table", class_="tmptabela")
-                result = result[0].find_all("td")
+                result = soup.find_all("table", class_="tmptabela")[0].find_all("td")
 
                 for i in result:
-                    opentag_parsed = str(i).split("<")
-                    closetag_parsed = opentag_parsed[1].split(">")
-                    info.append(closetag_parsed[1].encode("utf-8", "ignore"))
+                    parse = str(i).split("<")[1].split(">")
+                    info.append(parse[1].encode("utf-8", "replace").decode("utf-8"))
 
-                self.address = ", ".join(info)
+                del(info[-1])
+                self.__address = self.__address(", ".join(info))
                 return info
 
             else: continue
@@ -35,7 +35,4 @@ class Cep(Scraper):
 
 
     @property
-    def address(self): return self.__ADDRESS
-
-    @address.setter
-    def address(self, addr): self.__ADDRESS = addr
+    def address(self): return self.__address
