@@ -3,7 +3,11 @@ from abc import ABC, abstractmethod
 
 class Scraper(ABC):
     def __init__(self, **kwargs):
-        self.__objeto = kwargs["objeto"]
+        """
+        Parameters:
+            kwargs['data'] (string): Data
+        """
+        self.__data = kwargs["data"]
         self.__URL = None
 
         self.log = []
@@ -18,4 +22,4 @@ class Scraper(ABC):
     def URL(self): return self.__URL
 
     @property
-    def objeto(self): return self.__objeto
+    def data(self): return self.__data

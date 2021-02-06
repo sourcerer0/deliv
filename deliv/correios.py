@@ -11,7 +11,7 @@ class Correios(Scraper):
 
     def check_new_info(self):
         info = []
-        reply = requests.post(self.URL, data={"objetos": self.objeto})
+        reply = requests.post(self.URL, data={"objetos": self.data})
 
         for _ in range(10):
             if reply.ok:

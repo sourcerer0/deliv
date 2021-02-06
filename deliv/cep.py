@@ -14,7 +14,7 @@ class Cep(Scraper):
 
     def check_new_info(self):
         info = []
-        reply = requests.post(self.URL, data={"relaxation": self.objeto})
+        reply = requests.post(self.URL, data={"relaxation": self.data})
 
         for _ in range(10):
             if reply.ok:
