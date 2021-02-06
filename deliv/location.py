@@ -6,13 +6,13 @@ import pycountry
 import pytz
 
 class Location():
-    def __init__(self, location="", **kwargs):
+    def __init__(self, location=None, **kwargs):
         self._geo_locator = Nominatim(user_agent="locator-sourcerer0")
 
         self.__time = Delorean()
         self.__timezone = "UTC"
 
-        if location != "": self.location = (location)
+        if location != None: self.location = (location)
         else: self.__location = None
 
     def up_time(self): print(self.__time.format_datetime())
