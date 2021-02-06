@@ -6,23 +6,29 @@ import pycountry
 import pytz
 
 class Location():
-    def __init__(self, **kwargs):
-        self.geo_locator = Nominatim(user_agent="locator-sourcerer0")
-        self.__time = Delorean()
-        
-        try: self.location = (kwargs["location"])
-        except KeyError: self.__location = None
+    def __init__(self, location="", **kwargs):
+        self._geo_locator = Nominatim(user_agent="locator-sourcerer0")
 
-    def up_time(self): return self.__time.format_datetime()
+        self.__time = Delorean()
+        self.__timezone = "UTC"
+
+        if location != "": self.location = (location)
+        else: self.__location = None
+
+    def up_time(self): print(self.__time.format_datetime())
 
     def set_timezone(self):
-        new_timezone = Location.search_timezone(self.__location)
-        self.__time.shift(new_timezone)
+        print("Checking nearby timezones...")
+        self.__timezone = Location.__search_timezone(self.__location)
+        self.__time = self.__time.shift(self.__timezone)
 
 
 
     @property
-    def time(self): return self.__time.now().format_datetime()
+    def time(self): return self.__time.now().shift(self.__timezone)
+
+    @property
+    def human_time(self): return self.time.format_datetime()
 
     @property
     def location(self):
@@ -34,14 +40,14 @@ class Location():
     @location.setter
     def location(self, place):
         if type(place) == type(()):
-            self.__location = self.geo_locator.reverse(place, addressdetails=True, language="en").raw
+            self.__location = self._geo_locator.reverse(place, addressdetails=True, language="en").raw
         elif type(place) == type(""):
-            self.__location = self.geo_locator.geocode(place, addressdetails=True, language="en").raw
+            self.__location = self._geo_locator.geocode(place, addressdetails=True, language="en").raw
 
 
 
     @staticmethod
-    def search_timezone(PLACE, distance=250):
+    def __search_timezone(PLACE, max_dist=250):
         COUNTRY_ID = PLACE["address"]["country_code"]
         ERRORS, CHECKED = 0, 0
 
@@ -50,24 +56,23 @@ class Location():
         for zone in pytz.country_timezones[COUNTRY_ID]:
             CHECKED+=1
             try:
-                tz_location_info = Location.geo_locator.geocode(Location.edit_tz(zone), addressdetails=True, language="en")
+                tz_location_info = Nominatim(user_agent="search_timezone-deliv-sourcerer0").geocode(Location._edit_tz(zone), addressdetails=True, language="en")
+
                 tz_location_info.point[0] = PLACE["lat"]
-
                 distance = great_circle((PLACE["lat"], PLACE["lon"]), tz_location_info.point).km
-                if distance < TIMEZONE[1]: TIMEZONE = [zone, distance]
-                if distance < distance: break
 
-                if CHECKED % 3: key = ""
-                else: key = "\n"
-                print("CHECK %d: %s %.2f " % (CHECKED,TIMEZONE,distance))
+                if distance < TIMEZONE[1]: TIMEZONE = [zone, distance]
+                # print("%s %.2f " % (zone, distance))
+
+                if distance < max_dist: break
 
             except: ERRORS+=1
 
         print("\nErrors: %d\nPlaces checked: %d"%(ERRORS, CHECKED))
-        return TIMEZONE
+        return TIMEZONE[0]
 
     @staticmethod
-    def edit_tz(word):
+    def _edit_tz(word):
         word = list(word.split("/")[1])
 
         for pos, letter in enumerate(word):
