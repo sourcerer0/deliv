@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="deliv-sourcerer0",
+    name="deliv",
     version="0.1.1.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
@@ -16,7 +16,7 @@ setuptools.setup(
     keywords="delivery scraper",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Apache License 2.0",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
