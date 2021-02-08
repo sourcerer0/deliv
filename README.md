@@ -2,13 +2,17 @@
 Delivery service scraper
 
 ## Installation
-Get source code
+From source:
 ```shell script
 git clone git@github.com:sourcerer0/deliv.git && cd deliv
 
 sudo python3 -m setup install
 ```
-> Don't forget to add --branch to 'git clone' command, and get the latest version.
+
+Pip:
+```shell script
+python3 -m pip install deliv
+```
 
 ### Dependancies
 #### Package Installer
@@ -17,6 +21,9 @@ pip3 install -r requirements.txt
 ```
 
 ## Docs
+Basic Usage & Reference
+- [Scraper](https://github.com/sourcerer0/deliv/blob/master/docs/scraper.md)
+- [Location](https://github.com/sourcerer0/deliv/blob/master/docs/location.md)
 
 ## Contributing & Issue Tracker
 Branch & [Pull Request](https://github.com/sourcerer0/deliv/pulls)
