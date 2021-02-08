@@ -19,7 +19,10 @@ class Location():
 
     def set_timezone(self):
         print("Checking nearby timezones...")
-        self.__timezone = Location.__search_timezone(self.__location)
+        try:
+            self.__timezone = Location.__search_timezone(self.__location)
+        except TypeError: print("Location not defined!")
+
         self.__time = self.__time.shift(self.__timezone)
 
 
@@ -34,6 +37,9 @@ class Location():
     def location(self):
         try: print("Coordinates:".upper(), self.__location["lat"], self.__location["lon"])
         except KeyError: print("No coordinates founded")
+        except TypeError:
+            print("Location not defined!")
+            return
 
         for key in self.__location["address"]: print("%s: %s" % (key.upper(), self.__location["address"][key]))
 
