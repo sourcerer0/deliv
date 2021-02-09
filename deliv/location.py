@@ -34,14 +34,17 @@ class Location():
     def human_time(self): print(self.time.format_datetime())
 
     @property
-    def location(self):
-        try: print("Coordinates:".upper(), self.__location["lat"], self.__location["lon"])
+    def location(self): return self.__location
+
+    @property
+    def human_location(self):
+        try: print("Coordinates:".upper(), self.location["lat"], self.location["lon"])
         except KeyError: print("No coordinates founded")
         except TypeError:
             print("Location not defined!")
             return
 
-        for key in self.__location["address"]: print("%s: %s" % (key.upper(), self.__location["address"][key]))
+        for key in self.location["address"]: print("%s: %s" % (key.upper(), self.location["address"][key]))
 
     @location.setter
     def location(self, place):
