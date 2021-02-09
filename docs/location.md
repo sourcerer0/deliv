@@ -29,6 +29,11 @@ If None (standard): Must be defined with obj.location = <tuple or string>
 - Type: dict
 ```
 
+### self.human_location
+```
+- Description: Most useful, formatted information about self.location
+```
+
 ### self.__timezone
 ```
 - Description: Timezone. Initialized as UTC

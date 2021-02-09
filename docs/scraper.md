@@ -20,7 +20,7 @@ kwargs['data'] (string): Data to be submitted
 
 #### self.log
 ```
-- Description: Logs. Replied informations over time.
+- Description: Logs. Replied information over time.
 - Type: list
 ```
 
@@ -48,7 +48,7 @@ myPackage = Correios(data="<your package tracking code here>")
 
 # print(myPackage.URL)
 
-# In Correios class and others child classes, __init__ calls set_tracking_url 
+# In Correios class and others child classes, __init__ calls set_tracking_url()
 
 for info in myPackage.check_new_info(): print(info)
 
