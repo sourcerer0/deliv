@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="deliv",
-    version="1.0.0",
+    version="1.1.0-b.1",
     author="Lo Han",
     author_email="lohan.uchsa@protonmail.com",
     description="Delivery service scraper",
@@ -20,4 +20,13 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=[
+        'pycountry>=20.7.3',
+        'beautifulsoup4>=4.9.3',
+        'Delorean>=1.0.0',
+        'geopy>=2.1.0',
+        'pytz>=2021.1',
+        'requests>=2.25.1',
+        'urllib3>=1.26.3'
+    ]
 )
