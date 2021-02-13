@@ -62,7 +62,7 @@ class Location():
 
 
     @staticmethod
-    def __search_timezone(PLACE, max_dist=250):
+    def __search_timezone(PLACE, max_dist=120):
         COUNTRY_ID = PLACE["address"]["country_code"]
         ERRORS, CHECKED = 0, 0
 
